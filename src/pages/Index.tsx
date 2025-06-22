@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Calendar, TrendingUp, Bell, FileText, Calculator } from 'lucide-react';
+import { Calendar, TrendingUp, Bell, FileText, Calculator, Zap, Globe, BarChart3 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CalendarComponent } from '@/components/CalendarComponent';
@@ -8,21 +8,25 @@ import { MarketUpdates } from '@/components/MarketUpdates';
 import { ComplianceTracker } from '@/components/ComplianceTracker';
 import { ReportsAnalytics } from '@/components/ReportsAnalytics';
 import { FinanceComplianceCalendar } from '@/components/FinanceComplianceCalendar';
+import { CalculatorHub } from '@/components/CalculatorHub';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const menuItems = [
-    { id: 'overview', label: 'Portal Overview', icon: FileText },
-    { id: 'calendar', label: 'Meeting Calendar', icon: Calendar },
-    { id: 'finance-compliance', label: 'Finance Compliance Calendar', icon: Bell },
-    { id: 'market', label: 'Market Updates', icon: TrendingUp },
-    { id: 'compliance', label: 'Compliance Tracker', icon: Bell },
-    { id: 'reports', label: 'Reports & Analytics', icon: FileText },
+    { id: 'overview', label: 'Portal Overview', icon: Globe, gradient: 'from-purple-500 to-pink-500' },
+    { id: 'calculators', label: 'Financial Calculators', icon: Calculator, gradient: 'from-blue-500 to-cyan-500' },
+    { id: 'calendar', label: 'Meeting Calendar', icon: Calendar, gradient: 'from-green-500 to-emerald-500' },
+    { id: 'finance-compliance', label: 'Finance Compliance Calendar', icon: Bell, gradient: 'from-amber-500 to-orange-500' },
+    { id: 'market', label: 'Market Updates', icon: TrendingUp, gradient: 'from-red-500 to-rose-500' },
+    { id: 'compliance', label: 'Compliance Tracker', icon: Bell, gradient: 'from-indigo-500 to-purple-500' },
+    { id: 'reports', label: 'Reports & Analytics', icon: BarChart3, gradient: 'from-teal-500 to-blue-500' },
   ];
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'calculators':
+        return <CalculatorHub />;
       case 'calendar':
         return <CalendarComponent />;
       case 'finance-compliance':
@@ -39,57 +43,93 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-2000"></div>
+        <div className="absolute top-40 left-40 w-60 h-60 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse animation-delay-4000"></div>
+        
+        {/* Floating Geometric Shapes */}
+        <div className="absolute top-20 right-20 w-4 h-4 bg-white opacity-60 rotate-45 animate-spin-slow"></div>
+        <div className="absolute bottom-32 left-32 w-6 h-6 bg-cyan-400 opacity-40 animate-bounce"></div>
+        <div className="absolute top-1/2 right-1/4 w-8 h-8 bg-purple-400 opacity-50 rounded-full animate-ping"></div>
+      </div>
+
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-blue-200">
+      <header className="relative z-10 bg-black/20 backdrop-blur-xl shadow-2xl border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg">
-                  <Calculator className="h-6 w-6 text-white" />
+              <div className="flex items-center space-x-4">
+                <div className="relative">
+                  <div className="p-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300">
+                    <Calculator className="h-8 w-8 text-white" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                    CA Information Portal
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    CA Portal 3D
                   </h1>
-                  <p className="text-xs text-gray-500">Chartered Accountant Resources</p>
+                  <p className="text-sm text-gray-300 flex items-center space-x-2">
+                    <Zap className="h-4 w-4 text-yellow-400" />
+                    <span>Dynamic Financial Intelligence Hub</span>
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-4">
               <div className="text-right">
-                <p className="text-sm font-medium text-gray-700">Professional Portal</p>
-                <p className="text-xs text-gray-500">Information & Resources</p>
+                <p className="text-lg font-bold text-white">AI-Powered Portal</p>
+                <p className="text-sm text-gray-300">Next-Gen Analytics</p>
+              </div>
+              <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center animate-spin-slow">
+                <Globe className="h-6 w-6 text-white" />
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
-          {/* Sidebar */}
-          <div className="w-72 bg-white/70 backdrop-blur-sm rounded-xl shadow-lg p-6 h-fit sticky top-8 border border-blue-100">
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Portal Sections</h3>
-              <p className="text-sm text-gray-600">Access professional resources and information</p>
+          {/* Dynamic Sidebar */}
+          <div className="w-80 bg-black/30 backdrop-blur-xl rounded-3xl shadow-2xl p-6 h-fit sticky top-8 border border-white/10">
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-white mb-3 flex items-center space-x-2">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                <span>Portal Modules</span>
+              </h3>
+              <p className="text-gray-300">Advanced CA Tools & Analytics</p>
             </div>
-            <nav className="space-y-2">
-              {menuItems.map((item) => {
+            <nav className="space-y-3">
+              {menuItems.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                    className={`w-full group relative overflow-hidden rounded-2xl transition-all duration-300 ${
                       activeTab === item.id
-                        ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
-                        : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                        ? 'transform scale-105 shadow-2xl'
+                        : 'hover:scale-102 hover:shadow-lg'
                     }`}
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <Icon className="h-5 w-5" />
-                    <span className="font-medium text-sm">{item.label}</span>
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} ${activeTab === item.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-80'} transition-opacity duration-300`}></div>
+                    <div className={`relative flex items-center space-x-4 px-6 py-4 ${activeTab === item.id ? 'text-white' : 'text-gray-300 group-hover:text-white'} transition-colors duration-300`}>
+                      <div className="relative">
+                        <Icon className="h-6 w-6" />
+                        {activeTab === item.id && (
+                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>
+                        )}
+                      </div>
+                      <span className="font-semibold text-sm">{item.label}</span>
+                    </div>
+                    {activeTab === item.id && (
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/50 rounded-full"></div>
+                    )}
                   </button>
                 );
               })}
@@ -97,8 +137,12 @@ const Index = () => {
           </div>
 
           {/* Main Content */}
-          <div className="flex-1">
-            {renderContent()}
+          <div className="flex-1 relative">
+            <div className="bg-black/20 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10 min-h-[600px]">
+              <div className="p-8">
+                {renderContent()}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -109,101 +153,121 @@ const Index = () => {
 const PortalOverview = ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => {
   const portalSections = [
     {
+      id: 'calculators',
+      title: 'Financial Calculators',
+      description: 'Advanced calculation tools for GST, EMI, SIP, Tax, and complex financial computations',
+      icon: Calculator,
+      gradient: 'from-blue-500 to-cyan-500',
+      features: ['GST Calculator', 'EMI Calculator', 'SIP Calculator', 'Tax Calculator']
+    },
+    {
       id: 'calendar',
-      title: 'Meeting Calendar',
-      description: 'Schedule and manage your professional meetings, client appointments, and important events',
+      title: 'Smart Calendar',
+      description: 'AI-powered scheduling with intelligent meeting management and automated reminders',
       icon: Calendar,
-      color: 'from-blue-500 to-blue-600',
-      features: ['Meeting Scheduling', 'Event Management', 'Reminder System']
+      gradient: 'from-green-500 to-emerald-500',
+      features: ['Smart Scheduling', 'AI Reminders', 'Client Integration']
     },
     {
       id: 'finance-compliance',
-      title: 'Finance Compliance Calendar',
-      description: 'Track important financial compliance deadlines, regulatory filings, and statutory requirements',
+      title: 'Compliance Calendar',
+      description: 'Real-time tracking of financial compliance deadlines with predictive analytics',
       icon: Bell,
-      color: 'from-amber-500 to-orange-500',
-      features: ['Compliance Deadlines', 'Regulatory Updates', 'Filing Reminders']
+      gradient: 'from-amber-500 to-orange-500',
+      features: ['Deadline Tracking', 'Compliance Alerts', 'Regulatory Updates']
     },
     {
       id: 'market',
-      title: 'Market Updates',
-      description: 'Stay informed with latest financial market data, economic indicators, and regulatory news',
+      title: 'Market Intelligence',
+      description: 'Live market data with AI-driven insights and predictive financial analytics',
       icon: TrendingUp,
-      color: 'from-green-500 to-emerald-500',
-      features: ['Live Market Data', 'Economic Indicators', 'Financial News']
+      gradient: 'from-red-500 to-rose-500',
+      features: ['Live Data', 'AI Insights', 'Market Predictions']
     },
     {
       id: 'compliance',
       title: 'Compliance Tracker',
-      description: 'Monitor regulatory compliance requirements, deadlines, and filing statuses across all clients',
+      description: 'Comprehensive compliance monitoring with automated status updates and alerts',
       icon: Bell,
-      color: 'from-red-500 to-pink-500',
-      features: ['Filing Status', 'Deadline Tracking', 'Compliance Alerts']
+      gradient: 'from-indigo-500 to-purple-500',
+      features: ['Status Monitoring', 'Auto Updates', 'Risk Assessment']
     },
     {
       id: 'reports',
-      title: 'Reports & Analytics',
-      description: 'Access comprehensive reports and analytics for business insights and performance tracking',
-      icon: FileText,
-      color: 'from-purple-500 to-indigo-500',
-      features: ['Performance Reports', 'Analytics Dashboard', 'Custom Reports']
+      title: 'Analytics Dashboard',
+      description: 'Advanced data visualization with interactive charts and predictive modeling',
+      icon: BarChart3,
+      gradient: 'from-teal-500 to-blue-500',
+      features: ['Interactive Charts', 'Predictive Models', 'Custom Reports']
     }
   ];
 
   return (
-    <div className="space-y-8">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          Chartered Accountant Information Portal
-        </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Your comprehensive resource center for professional information, compliance tracking, 
-          market updates, and business insights
+    <div className="space-y-10">
+      <div className="text-center mb-16">
+        <div className="relative inline-block">
+          <h2 className="text-6xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+            CA Portal 3D
+          </h2>
+          <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce"></div>
+        </div>
+        <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          Experience the future of Chartered Accountancy with our AI-powered, 
+          3D-enhanced professional portal featuring advanced analytics and intelligent automation
         </p>
       </div>
 
-      {/* Portal Sections Grid */}
+      {/* Feature Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {portalSections.map((section) => {
+        {portalSections.map((section, index) => {
           const Icon = section.icon;
           return (
             <Card 
               key={section.id} 
-              className="hover:shadow-xl transition-all duration-300 border border-blue-100 bg-white/70 backdrop-blur-sm cursor-pointer group"
+              className="group relative overflow-hidden bg-black/30 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-500 cursor-pointer transform hover:scale-105 hover:shadow-2xl"
               onClick={() => setActiveTab(section.id)}
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-4">
-                  <div className={`p-3 rounded-xl bg-gradient-to-r ${section.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className="h-6 w-6 text-white" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${section.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+              
+              <CardHeader className="pb-4 relative z-10">
+                <div className="flex items-center space-x-6">
+                  <div className="relative">
+                    <div className={`p-4 rounded-2xl bg-gradient-to-r ${section.gradient} shadow-2xl group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="h-8 w-8 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   <div>
-                    <CardTitle className="text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-2xl text-white group-hover:text-cyan-300 transition-colors duration-300">
                       {section.title}
                     </CardTitle>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 mb-4 text-base">
+              
+              <CardContent className="relative z-10">
+                <CardDescription className="text-gray-300 mb-6 text-lg leading-relaxed">
                   {section.description}
                 </CardDescription>
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-gray-700">Key Features:</p>
-                  <ul className="space-y-1">
-                    {section.features.map((feature, index) => (
-                      <li key={index} className="text-sm text-gray-600 flex items-center">
-                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
-                        {feature}
-                      </li>
+                <div className="space-y-3">
+                  <p className="text-sm font-bold text-cyan-400">Advanced Features:</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {section.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center space-x-2 text-sm text-gray-300">
+                        <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"></div>
+                        <span>{feature}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+                
                 <Button 
-                  className="w-full mt-6 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
+                  className={`w-full mt-6 bg-gradient-to-r ${section.gradient} hover:shadow-2xl transform transition-all duration-300 hover:scale-105`}
                   onClick={() => setActiveTab(section.id)}
                 >
-                  Access {section.title}
+                  <Zap className="h-4 w-4 mr-2" />
+                  Launch {section.title}
                 </Button>
               </CardContent>
             </Card>
@@ -211,43 +275,27 @@ const PortalOverview = ({ setActiveTab }: { setActiveTab: (tab: string) => void 
         })}
       </div>
 
-      {/* Quick Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-          <CardContent className="p-6 text-center">
-            <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FileText className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Professional Resources</h3>
-            <p className="text-sm text-gray-600">
-              Access comprehensive information and tools for professional CA practice
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
-          <CardContent className="p-6 text-center">
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Real-time Updates</h3>
-            <p className="text-sm text-gray-600">
-              Stay current with latest market data and regulatory changes
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
-          <CardContent className="p-6 text-center">
-            <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Bell className="h-6 w-6 text-white" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Compliance Alerts</h3>
-            <p className="text-sm text-gray-600">
-              Never miss important deadlines with our comprehensive tracking system
-            </p>
-          </CardContent>
-        </Card>
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
+        {[
+          { title: 'AI-Powered', subtitle: 'Smart Automation', icon: Zap, color: 'from-yellow-400 to-orange-500' },
+          { title: '3D Interface', subtitle: 'Immersive Experience', icon: Globe, color: 'from-purple-400 to-pink-500' },
+          { title: 'Real-time', subtitle: 'Live Data Updates', icon: TrendingUp, color: 'from-green-400 to-cyan-500' },
+          { title: 'Cloud-Based', subtitle: 'Secure & Scalable', icon: FileText, color: 'from-blue-400 to-indigo-500' }
+        ].map((stat, index) => {
+          const Icon = stat.icon;
+          return (
+            <Card key={index} className="bg-black/40 backdrop-blur-xl border border-white/10 hover:border-white/30 transition-all duration-300 group">
+              <CardContent className="p-6 text-center">
+                <div className={`w-16 h-16 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="font-bold text-white mb-2 text-lg">{stat.title}</h3>
+                <p className="text-sm text-gray-300">{stat.subtitle}</p>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
